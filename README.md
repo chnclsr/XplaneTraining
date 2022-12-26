@@ -15,7 +15,9 @@ göre eğitilen ajan zamanla en fazla ödülü alabileceği taktiği keşfederek
 Bu projede üç ayrı Pekiştirmeli Öğrenme algoritmasının uygulaması gerçekleştirilmiştir.
 Bunlar; Poliçe tabanlı Yakınsal Poliçe Optimizasyon Algoritması (Proximal Policy Optimization
 Algorithm)(PPO), aktör kritik tabanlı Yumuşatılmış Aktör Kritik (Soft Actor Critic) ve Avantaj Fonksiyonlu Aktör Kritik 
-(Advantage Actor Critic) metotlarıdır.
+(Advantage Actor Critic) metotlarıdır. 
+
+#Deneme
 
 # X-Plane 11 Ortamı
 X-Plane 11 simülasyonu ana sunucusu ile UDP üzerinden paket alışverişini desteklemektedir. 
