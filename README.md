@@ -3,7 +3,7 @@ Bu çalışma X-Plane 11 uçuş simülasyonu üzerinde sanal varlıkların peki�
 gerekli gym ortamı ve öğrenme metotlarını içermektedir. Bir uçağın manevra kabiliyetlerinin yanısıra 
 sensör ve savunma sistemlerinin de uygun görevlerde kullanımı mümkündür.
 
-# Pekiştirmeli Öğrenme Uygulamaları
+# Pekiştirmeli Öğrenme
 Pekiştirmeli Öğrenmede Ajan(agent), bulunduğu
 ortam(enviroment) ile etkileşime geçer. Pekiştirmeli Öğrenme, Markov karar süreci model kullanmaktadır. 
 Algılama (sensation), eylem (action) ve hedef (goal) Markov karar süreçlerinin en önemli 3 özelliğidir.
@@ -17,16 +17,12 @@ Bunlar; Poliçe tabanlı Yakınsal Poliçe Optimizasyon Algoritması (Proximal P
 Algorithm)(PPO), aktör kritik tabanlı Yumuşatılmış Aktör Kritik (Soft Actor Critic) ve Avantaj Fonksiyonlu Aktör Kritik 
 (Advantage Actor Critic) metotlarıdır.
 
-# Oyun Tasarımı
-Oyunu tasarlarken ana karakterin olması önündeki engellere atış yapabileceği ve bu
-engellerin karaktere çarpması durumunda ana karakterin oyunu kaybetmesi ile oyunun
-sonlanması planlanmıştır. Engellerin ise rastgele bir şekilde ana karaktere doğru
-ilerleyerek hareket etmeleri hedeflenmiştir. Ana karakterin davranış seçenekleri
-arasında yer değiştirmek ve engellere atış yapmak vardır.
-Oyunun hikayesi ise bir Kedinin önüne çıkan balıklara karşı kendini koruması ve onları
-gerekirse avlaması gerektiği. Projenin en son karar kılınan hikayesi bu şekildedir.
+# X-Plane 11 Ortamı
+X-Plane 11 simülasyonu ana sunucusu ile UDP üzerinden paket alışverişini desteklemektedir. 
+[XPlaneConnect](https://github.com/adderbyte/GYM_XPLANE_ML/tree/master/gym_xplane_final_version)
+eklentisiyle simülasyon tarafında yazılabilecek ve okunabilecek veriler temel fonksiyonlarla 
+kodlanmıştır.  Çalışmada simülasyon ortamı-ajan haberleşmesi için bu yapı kullanılmaktadır. 
 
-![Catastrophe](/readmeimg/S1-1-1.png "screenshot of the game")
 
 # Oyunu oynamak ve Pekiştirmeli Öğrenme ile eğitmek 
 
