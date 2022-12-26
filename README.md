@@ -4,19 +4,13 @@ gerekli gym ortamı ve öğrenme metotlarını içermektedir. Bir uçağın mane
 sensör ve savunma sistemlerinin de uygun görevlerde kullanımı mümkündür.
 
 # Pekiştirmeli Öğrenme Uygulamaları
-Pekiştirmeli Öğrenmenin temel kavramları şu şekildedir Ajan(agent), bulunduğu
-çevre(enviroment) ile etkileşime geçer. Ajan eylemler(actions) gerçekleştirerek farklı
-durumların(states) oluştuğu senaryolara gelir. Ajanın amacı aldığı ödül miktarını
-arttırmaktır. Ajanın pekiştirmesini sağlayarak en iyi ödülü deneyimleyerek elde
-etmesini sağlarız. Bu strateji poliçe(policy) olarak adlandırılır. Projede Tasarladığımız
-oyundan örnek vererek kavramları eşleştirecek olursak. Ajan, Ana Karakterdir
-Görselde Kedi ile temsil edilmektedir. Çevre ise oyunun içerisinde bulunan ve ajanın
-etkileşime geçtiği her objedir. Eylemleri ise ajanın atış yapması, sağa, sola, çapraz
-ilerleyerek engellerden kaçınmasıdır. Durumlar ise oyunda ajanın kara alması gereken
-her andır.
-Pekiştirmeli Öğrenme, Markov karar süreci model kullanmaktadır. Markov karar
-süreçlerinin en önemli 3 özelliği; algılama (sensation), eylem (action) ve hedef (goal)[7]
-Her bir durum sadece ve sadece bir önceki durumun sonucudur.
+Pekiştirmeli Öğrenmede Ajan(agent), bulunduğu
+ortam(enviroment) ile etkileşime geçer. Pekiştirmeli Öğrenme, Markov karar süreci model kullanmaktadır. 
+Algılama (sensation), eylem (action) ve hedef (goal) Markov karar süreçlerinin en önemli 3 özelliğidir.
+Her bir durum sadece ve sadece bir önceki durumun sonucudur. Ajan eylemler gerçekleştirerek farklı
+durumlara geçiş yapar. Ajanın amacı aldığı ödül miktarını arttırmaktır. Belirli bir ödül-ceza sistemine
+göre eğitilen ajan zamanla en fazla ödülü alabileceği taktiği keşfederek görevi gerçekleştirmeyi öğrenir.
+
 
 
 ![Pekiştirmeli Öğrenme Kavramları Etkileşim Diyagramı](/readmeimg/S3-4-1.png)
