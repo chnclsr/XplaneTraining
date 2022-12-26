@@ -39,7 +39,7 @@ aşağıdaki gibidir.
 | z               | Düşey Hız (z)   |
 | Throttle        |                 |
 
-#### Aksiyonlar -1 +1 aralığında yani -180 derece ile +180 derece arasındadır. Her aksiyon -/+ 18 derecelik kanat hareketidir.
+#### Aksiyonlar -1 +1 aralığında yani -180 derece ile +180 derece arasındadır. Her aksiyon -/+ 18 derecelik roll değerleridir. 
 
 | Aksiyonlar |  |
 |------------|-------|
