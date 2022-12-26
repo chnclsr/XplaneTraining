@@ -29,21 +29,22 @@ hızlardaki başlangıçlarda kanatları düzeltme ve roll değerini 0-20 derece
 sağa sola yalpalamasını önlemeye çalışmalıdır. Ajanın eğitilebilmesi için gerekli durum değerleri ve aksiyonlar
 aşağıdaki gibidir.
 
-| Durum Değerleri | Dataref |
-|-----------------|---------|
-| Enlem           | "sim/flightmodel/position/latitude" |
+#### Durum değerleri dataref sorgusu ile alınmakta, her değer kendi maksimum değerine göre normalize edilmektedir.
+| Durum Değerleri | Dataref                                           |
+|-----------------|---------------------------------------------------|
+| Enlem           | "sim/flightmodel/position/latitude"               |
 | Boylam          | "longitude": "sim/flightmodel/position/longitude" |
-| Yükseklik       | "sim/flightmodel/position/elevation"     |
-| x               |         |
-| y               |         |
-| z               |         |
-| Throttle        |         |
-| Roll        |         |
-| Rudder        |         |
-| Pitch        |         |
-| Düşey Hız (x)        |         |
-| Düşey Hız (y)        |         |
-| Düşey Hız (z)        |         |
+| Yükseklik       | "sim/flightmodel/position/elevation"              |
+| x               | "sim/flightmodel/position/local_x"                |
+| y               | "sim/flightmodel/position/local_y"                |
+| z               | "sim/flightmodel/position/local_z"                |
+| Throttle        | "sim/multiplayer/position/plane0_throttle"        |
+| Roll            | "sim/multiplayer/position/plane0_the              |
+| Rudder          | "sim/multiplayer/position/plane0_phi"             |
+| Pitch           | "sim/multiplayer/position/plane0_psi"             |
+| Düşey Hız (x)   | "sim/multiplayer/position/plane0_v_x"             |
+| Düşey Hız (y)   | "sim/multiplayer/position/plane0_v_y"             |
+| Düşey Hız (z)   | "sim/multiplayer/position/plane0_v_z"             |
 
 #### Aksiyonlar -1 +1 aralığında yani -180 derece ile +180 derece arasındadır. Her aksiyon -/+ 18 derecelik roll değerleridir. 
 
@@ -61,11 +62,17 @@ aşağıdaki gibidir.
 Ödül = (-1) x ((|Roll açısı| - Roll limit değeri) / (180 - Roll limit değeri))
 
 
-## Eğer Miniconda kullanarak çalıştıracaksanız ilk 3 adımı uygulayınız: 
+# Gereklilikler
+> CUDA 10.2 \
+> Python 3.8 \
+> 
 
-#### MiniConda kurulumundan sonra conda alanını oluşturunuz
+
+## GYM ortamı kurulu
+
 ```
-conda create --name test1 
+pip install --upgrade pip
+pip install -e .
 ```
 
 #### Oluşturduğunuz alanı aktive ediniz 
