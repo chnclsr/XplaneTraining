@@ -69,19 +69,19 @@ aşağıdaki gibidir.
 > XPlaneConnect
 
 ## GYM ortamı kurulumu
-#### 1. X-Plane ML [reposundaki](https://github.com/adderbyte/GYM_XPLANE_ML/tree/master/gym_xplane_final_version), “Installation guide” kısmındaki adımları ilk ve son adım harici uygulayın.
-#### 2. GYM ortamı
+#### X-Plane ML [reposundaki](https://github.com/adderbyte/GYM_XPLANE_ML/tree/master/gym_xplane_final_version), “Installation guide” kısmındaki adımları ilk ve son adım harici uygulayın.
+#### GYM ortamı
 ```
 pip install --upgrade pip
 pip install -e .
 ```
 
-#### Gerekli kütüphaneler
+#### Gerekli kütüphane kurulumları
 ```
 pip install -r requirements.txt
 ```
 
-#### CUDA test 
+#### CUDA testi
 ```
 python
 import torch
