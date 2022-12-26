@@ -65,11 +65,12 @@ aşağıdaki gibidir.
 # Gereklilikler
 > CUDA 10.2 \
 > Python 3.8 \
-> 
-
+> X-Plane 11 \
+> XPlaneConnect
 
 ## GYM ortamı kurulu
-
+#### 1. X-Plane ML [reposundaki](https://github.com/adderbyte/GYM_XPLANE_ML/tree/master/gym_xplane_final_version), “Installation guide” kısmındaki adımları ilk ve son adım harici uygulayın. (REPO dosyalarını değil, 2. Adımdaki dosyaları kullanın!!)
+#### 2. GYM ortamını kurun.
 ```
 pip install --upgrade pip
 pip install -e .
