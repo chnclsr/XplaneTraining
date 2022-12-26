@@ -68,15 +68,15 @@ aşağıdaki gibidir.
 > X-Plane 11 \
 > XPlaneConnect
 
-## GYM ortamı kurulu
-#### 1. X-Plane ML [reposundaki](https://github.com/adderbyte/GYM_XPLANE_ML/tree/master/gym_xplane_final_version), “Installation guide” kısmındaki adımları ilk ve son adım harici uygulayın. (REPO dosyalarını değil, 2. Adımdaki dosyaları kullanın!!)
-#### 2. GYM ortamını kurun.
+## GYM ortamı kurulumu
+#### 1. X-Plane ML [reposundaki](https://github.com/adderbyte/GYM_XPLANE_ML/tree/master/gym_xplane_final_version), “Installation guide” kısmındaki adımları ilk ve son adım harici uygulayın.
+#### 2. GYM ortamı
 ```
 pip install --upgrade pip
 pip install -e .
 ```
 
-#### Gerekli kütüphaneleri kurun.
+#### Gerekli kütüphaneler
 ```
 pip install -r requirements.txt
 ```
@@ -100,7 +100,7 @@ kodlarından birini çalıştırın.
 python basic_example.py
 ```
 
-### Wandb ayarları
+#### Wandb ayarları
 Wandb’de hesap açın. Hesabınıza giriş yapıp New Project’e tıklayın. Bir isim verip
 projenizi oluşturun. Verilen API KEY’i, kullanıcı adınızı ve projeye verdiğiniz ismi kaydedin. 
 
@@ -118,7 +118,7 @@ yapınıza algoritma tipini ve hatırlatıcı parametreler ekleyin.
 display_name = "Xplane11_RL_PPO_Training_1"
 ```
 
-### Eğitimi başlat
+#### Eğitimi başlat
 
 ```
 cd training/PPO # SAC, A2C
