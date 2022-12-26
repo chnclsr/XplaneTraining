@@ -52,7 +52,7 @@ aşağıdaki gibidir.
 
 # Ödül Fonksiyonu
 #### Ödül değeri hesaplanırken roll açısının belirli bir aralıkta olması pozitif etkilerken tolerans üzerinde değer arttıkça ceza artmaktadır.
-Ödül = (-1) x (|Roll açısı| - Roll limit değeri) / (180 - Roll limit değeri)
+Ödül = (-1) x ((|Roll açısı| - Roll limit değeri) / (180 - Roll limit değeri))
 
 
 ## Eğer Miniconda kullanarak çalıştıracaksanız ilk 3 adımı uygulayınız: 
