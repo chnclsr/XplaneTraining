@@ -23,11 +23,38 @@ X-Plane 11 simülasyonu ana sunucusu ile UDP üzerinden paket alışverişini de
 eklentisiyle simülasyon tarafında yazılabilecek ve okunabilecek veriler temel fonksiyonlarla 
 kodlanmıştır.  Çalışmada simülasyon ortamı-ajan haberleşmesi için bu yapı kullanılmaktadır. 
 
+Eğitim için planlanan ilk görevde F-4 Phantom uçağı eğitilmektedir. Hedef olarak, rastgele roll açısı ve
+hızlardaki başlangıçlarda kanatları düzeltme ve roll değerini 0-20 derece aralığında tutma beklenmektedir.
+20 derece kontrolde sapma üst limitidir. Ajan alacağı aksiyonlarla roll açısını bu aralıkta tutarak uçağı
+sağa sola yalpalamasını önlemeye çalışmalıdır. Ajanın eğitilebilmesi için gerekli durum değerleri ve aksiyonlar
+aşağıdaki gibidir.
 
-# Oyunu oynamak ve Pekiştirmeli Öğrenme ile eğitmek 
+| Durum Değerleri |  |
+|-----------------|-----------------|
+| Enlem           | Roll            |
+| Boylam          | Rudder          |
+| Yükseklik       | Pitch           |
+| x               | Düşey Hız (x)   |
+| y               | Düşey Hız (y)   |
+| z               | Düşey Hız (z)   |
+| Throttle        |                 |
 
-Kurulum için miniconda kullanılması tavsiye edilir.Ama zorunlu değildir 
-miniconda kurulumu için linkten kullandığınız işletim sistemine uygun sürümü seçiniz ve kurunuz 
+#### Aksiyonlar -1 +1 aralığında yani -180 derece ile +180 derece arasındadır. Her aksiyon -/+ 18 derecelik kanat hareketidir.
+
+| Aksiyonlar |  |
+|------------|-------|
+| -1         | 1     |
+| -0.9       | 0.9   |
+| -0.8       | 0.8   |
+| -0.7       | 0.7   |
+| -0.6       | 0.6   |
+| -0.5       | 0.5   |
+| -0.4       | 0.4   |
+| -0.3       | 0.3   |
+| -0.2       | 0.2   |
+| -0.1       | 0.1   |
+| 0          |       |
+
 
 [MiniConda Latest Install](https://docs.conda.io/en/latest/miniconda.html)
 
