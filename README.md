@@ -41,20 +41,14 @@ aşağıdaki gibidir.
 
 #### Aksiyonlar -1 +1 aralığında yani -180 derece ile +180 derece arasındadır. Her aksiyon -/+ 18 derecelik roll değerleridir. 
 
-| Aksiyonlar |  |
-|------------|-------|
-| -1         | 1     |
-| -0.9       | 0.9   |
-| -0.8       | 0.8   |
-| -0.7       | 0.7   |
-| -0.6       | 0.6   |
-| -0.5       | 0.5   |
-| -0.4       | 0.4   |
-| -0.3       | 0.3   |
-| -0.2       | 0.2   |
-| -0.1       | 0.1   |
-| 0          |       |
-
+| Aksiyonlar      |                |
+|-----------------|----------------|
+| 21              | Ayrık aksiyon  |
+| 1 > -1 x 180    | 11 > 1 x 180   |
+| 2 > -0.9 x 180  | 12 > 0.9 x 180 |
+| .. > ..         | .. > ..        |
+| 10 > -0.1 x 180 | 20 > 0.1 x 180 |
+| 11 > 0 x 180    |                |
 
 [MiniConda Latest Install](https://docs.conda.io/en/latest/miniconda.html)
 
