@@ -50,7 +50,10 @@ aşağıdaki gibidir.
 | 10 > -0.1 x 180 | 20 > 1 x 180   |
 | 11 > 0 x 180    |                |
 
-[MiniConda Latest Install](https://docs.conda.io/en/latest/miniconda.html)
+# Ödül Fonksiyonu
+
+![\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}](https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}) 
+
 
 ## Eğer Miniconda kullanarak çalıştıracaksanız ilk 3 adımı uygulayınız: 
 
