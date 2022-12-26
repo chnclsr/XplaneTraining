@@ -12,12 +12,10 @@ durumlara geçiş yapar. Ajanın amacı aldığı ödül miktarını arttırmakt
 göre eğitilen ajan zamanla en fazla ödülü alabileceği taktiği keşfederek görevi gerçekleştirmeyi öğrenir.
 
 
-
-![Pekiştirmeli Öğrenme Kavramları Etkileşim Diyagramı](/readmeimg/S3-4-1.png)
-Şekil 3.4.1 Pekiştirmeli Öğrenme Kavramları Etkileşim Diyagramı [8]
-Bu projede iki ayrı Pekiştirmeli Öğrenme algoritmasının uygulaması gerçekleştirilmiştir.
-Bunlar; Yakınsal Poliçe Optimizasyon Algoritmaları (Proximal Policy Optimization
-Algorithms)(PPO) ve Derin Pekiştirmeli Q-Öğrenme(Deep Q-Learning)
+Bu projede üç ayrı Pekiştirmeli Öğrenme algoritmasının uygulaması gerçekleştirilmiştir.
+Bunlar; Poliçe tabanlı Yakınsal Poliçe Optimizasyon Algoritması (Proximal Policy Optimization
+Algorithm)(PPO), aktör kritik tabanlı Yumuşatılmış Aktör Kritik (Soft Actor Critic) ve Avantaj Fonksiyonlu Aktör Kritik 
+(Advantage Actor Critic) metotlarıdır.
 
 # Oyun Tasarımı
 Oyunu tasarlarken ana karakterin olması önündeki engellere atış yapabileceği ve bu
