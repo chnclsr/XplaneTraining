@@ -69,7 +69,7 @@ aşağıdaki gibidir.
 > XPlaneConnect
 #### Detaylı bilgi için bknz:[Kurulum rehberi](https://docs.google.com/document/d/1BztqcC2Ydr5_2HLDyuZeYU8KuzkWx4QpsVCZQ835E8s/edit?usp=sharing)
 ## GYM ortamı kurulumu
-#### X-Plane ML [reposundaki](https://github.com/adderbyte/GYM_XPLANE_ML/tree/master/gym_xplane_final_version), “Installation guide” kısmındaki adımları ilk ve son adım harici uygulayın.
+#### X-Plane ML [reposunda](https://github.com/adderbyte/GYM_XPLANE_ML/tree/master/gym_xplane_final_version), “Installation guide” kısmındaki adımları ilk ve son adım harici uygulayın.
 #### GYM ortamı
 ```
 pip install --upgrade pip
