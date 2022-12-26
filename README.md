@@ -1,4 +1,4 @@
-# B_X-Plane 11
+# X-Plane 11
 Bu çalışma X-Plane 11 uçuş simülasyonu üzerinde sanal varlıkların pekiştirmeli öğrenme ile eğitilebilmesi için
 gerekli gym ortamı ve öğrenme metotlarını içermektedir. Bir uçağın manevra kabiliyetlerinin yanısıra 
 sensör ve savunma sistemlerinin de uygun görevlerde kullanımı mümkündür.
