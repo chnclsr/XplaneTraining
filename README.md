@@ -63,6 +63,7 @@ aşağıdaki gibidir.
 
 
 # Gereklilikler
+#### [Kurulum rehberi](https://docs.google.com/document/d/1BztqcC2Ydr5_2HLDyuZeYU8KuzkWx4QpsVCZQ835E8s/edit?usp=sharing)
 > CUDA 10.2 \
 > Python 3.8 \
 > X-Plane 11 \
