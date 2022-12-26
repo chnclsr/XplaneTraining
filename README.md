@@ -52,7 +52,7 @@ aşağıdaki gibidir.
 
 # Ödül Fonksiyonu
 
-![\Large R=\frac{-\pm{b^2-4ac}{2a}](https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}) 
+x_{1,2} = \frac{-b \pm \sqrt{b^2-4ac}}{2b} 
 
 
 ## Eğer Miniconda kullanarak çalıştıracaksanız ilk 3 adımı uygulayınız: 
