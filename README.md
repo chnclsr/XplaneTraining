@@ -76,39 +76,53 @@ pip install --upgrade pip
 pip install -e .
 ```
 
-#### Oluşturduğunuz alanı aktive ediniz 
+#### Gerekli kütüphaneleri kurun.
 ```
-conda activate test1
-```
-
-#### Conda üzerinde GYM modülünü yükleyin Eğer Conda ile kuruluma devam etmiyorsanız pip ile yükleyiniz 
-```
-conda install -c conda-forge gym-all
-pip install gym-all
+pip install -r requirements.txt
 ```
 
-
-### Stable-Baselines3'ü yükleyiniz 
+#### CUDA test 
 ```
-pip install stable-baselines3[extra] 
-```
-
-### Pyglet'i yükleyiniz 
-```
-pip install pyglet 
+python
+import torch
+torch.cuda.is_available() 
 ```
 
-### Tensorflow'u yükleyiniz 
+
+#### Simulasyon testi 
+X-Plane 11’ i çalıştırıp, New Flight’a tıklayın. Sol aşağından F-4 Phantom uçağını seçin, 
+istediğiniz hava ve zaman durumunu ayarlayıp Start Flight’a tıklayın. Sonraki girişlerinizde
+RESUME LAST FLIGHT’ı kullanın. Uçağı gördükten sonra terminalden örnek bağlantı 
+kodlarından birini çalıştırın. 
+
+
 ```
-pip install tensorflow
+python basic_example.py
 ```
 
-### Tensorflow-gpu yükleyiniz
+### Wandb ayarları
+Wandb’de hesap açın. Hesabınıza giriş yapıp New Project’e tıklayın. Bir isim verip
+projenizi oluşturun. Verilen API KEY’i, kullanıcı adınızı ve projeye verdiğiniz ismi kaydedin. 
+
+./training/algo/train.py içinde aşağıdaki satırları güncelleyin.
 ```
-pip install tensorflow-gpu
+os.environ["WANDB_API_KEY"] = "api key"
+user = "who r u?"
+project = "projeismi" 
 ```
 
-### Pygame'i yükleyiniz
+Bu satırda başlattığınız eğitime bir isim verin. Yüzlerce eğitim olabileceğinden isimlendirme
+yapınıza algoritma tipini ve hatırlatıcı parametreler ekleyin. 
+
 ```
-pip install pygame 
-``` 
+display_name = "Xplane11_RL_PPO_Training_1"
+```
+
+### Eğitimi başlat
+
+```
+cd training/PPO # SAC, A2C
+python train.py
+```
+
+
