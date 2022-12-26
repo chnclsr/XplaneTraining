@@ -29,15 +29,21 @@ hızlardaki başlangıçlarda kanatları düzeltme ve roll değerini 0-20 derece
 sağa sola yalpalamasını önlemeye çalışmalıdır. Ajanın eğitilebilmesi için gerekli durum değerleri ve aksiyonlar
 aşağıdaki gibidir.
 
-| Durum Değerleri |  |
-|-----------------|-----------------|
-| Enlem           | Roll            |
-| Boylam          | Rudder          |
-| Yükseklik       | Pitch           |
-| x               | Düşey Hız (x)   |
-| y               | Düşey Hız (y)   |
-| z               | Düşey Hız (z)   |
-| Throttle        |                 |
+| Durum Değerleri | Dataref |
+|-----------------|---------|
+| Enlem           | "sim/flightmodel/position/latitude" |
+| Boylam          | "longitude": "sim/flightmodel/position/longitude" |
+| Yükseklik       | "sim/flightmodel/position/elevation"     |
+| x               |         |
+| y               |         |
+| z               |         |
+| Throttle        |         |
+| Roll        |         |
+| Rudder        |         |
+| Pitch        |         |
+| Düşey Hız (x)        |         |
+| Düşey Hız (y)        |         |
+| Düşey Hız (z)        |         |
 
 #### Aksiyonlar -1 +1 aralığında yani -180 derece ile +180 derece arasındadır. Her aksiyon -/+ 18 derecelik roll değerleridir. 
 
