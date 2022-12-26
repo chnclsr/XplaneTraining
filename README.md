@@ -44,10 +44,10 @@ aşağıdaki gibidir.
 | Aksiyonlar      |                |
 |-----------------|----------------|
 | 21              | Ayrık aksiyon  |
-| 1 > -1 x 180    | 11 > 1 x 180   |
-| 2 > -0.9 x 180  | 12 > 0.9 x 180 |
+| 1 > -1 x 180    | 12 > 0.1 x 180 |
+| 2 > -0.9 x 180  | 13 > 0.2 x 180 |
 | .. > ..         | .. > ..        |
-| 10 > -0.1 x 180 | 20 > 0.1 x 180 |
+| 10 > -0.1 x 180 | 20 > 1 x 180   |
 | 11 > 0 x 180    |                |
 
 [MiniConda Latest Install](https://docs.conda.io/en/latest/miniconda.html)
