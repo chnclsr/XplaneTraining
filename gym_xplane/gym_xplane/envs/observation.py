@@ -1,5 +1,5 @@
 # import gym_xplane.parameters as params
-import gym_xplane as params
+from gym_xplane.gym_xplane.parameters2 import *
 from .keywords import *
 from .vehicle import Aircraft, Global
 
@@ -12,9 +12,9 @@ class XPlaneObserver():
         self.aircraft = Aircraft()
         self.glob = Global()
 
-        self.position_drefs = params.get_position_drefs()
-        self.tcas_drefs = params.get_tcas_drefs()
-        self.global_drefs = params.get_global_drefs()
+        self.position_drefs = get_position_drefs()
+        self.tcas_drefs = get_tcas_drefs()
+        self.global_drefs = get_global_drefs()
 
         self.prepare_drefs()
 
