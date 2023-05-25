@@ -17,7 +17,7 @@ class xplane_space():
             "Gear":  spaces.Discrete(2),"Flaps":  spaces.Box(low=0, high=1, shape=()),
             "Speedbrakes": spaces.Box(low=-0.5, high=1.5, shape=())})
         '''
-        return spaces.MultiDiscrete([21])
+        return spaces.Discrete(21)
 
     def _observation_space(self):
         
@@ -29,5 +29,5 @@ class xplane_space():
             "speed": spaces.Box(low=-2205, high=2205, shape=())})
         '''
         #return spaces.Box(np.array([ -360, -360, 0 ,-290,-100,-360,-360,-1000,-1300,-1000,-1000]),np.array([360,360,8500,290,100,360,360,1000,1300,1000,1000]))
-        return spaces.Box(0,1, shape=(10,))
+        return spaces.Box(-100000, 100000, shape=(10,))
       

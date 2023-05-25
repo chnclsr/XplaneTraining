@@ -1,5 +1,5 @@
 # import gym_xplane.parameters as params
-from gym_xplane.gym_xplane.parameters2 import *
+from gym_xplane.parameters2 import *
 from .keywords import *
 from .vehicle import Aircraft, Global
 

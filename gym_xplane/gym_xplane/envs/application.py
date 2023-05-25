@@ -36,6 +36,7 @@ class XPlaneApplier():
         self.throttle_smntcs = {0:tp[0], 1:tp[1], 2:tp[2], 3:tp[3], 4:tp[4], 5:tp[5], 6:tp[6], 7:tp[7], 8:tp[8], 9:tp[9], 10:tp[10]}
 
     def interpret(self, semantics, action):  # convert neural network output to predefined semantics without any intermediate process
+        print(action)
         point = semantics.get(action)
         return point
 

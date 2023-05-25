@@ -1,7 +1,7 @@
 import gym
 from .. import xpc
-import gym_xplane.gym_xplane.parameters as parameters
-import gym_xplane.gym_xplane.space_definition as envSpaces
+import gym_xplane.parameters as parameters
+import gym_xplane.space_definition as envSpaces
 import numpy as np
 import time
 from gym import spaces
@@ -13,7 +13,17 @@ from. application import XPlaneApplier
 
 class XplaneEnv(gym.Env):
     "Pekiştirmeli öğrenme GYM objesi. Sunucu-İstemci tarafında XplaneConnect plugins kullanılmıştır."
-    def __init__(self, clientAddr, xpHost, xpPort, clientPort, timeout=3000, max_episode_steps=303, test=False):
+    def __init__(self, config):
+        super().__init__()
+        # ---------------------------------------
+        clientAddr = '0.0.0.0'
+        xpHost = '127.0.0.1'
+        xpPort = 49009
+        clientPort = 3000
+        timeout = 3000
+        max_episode_steps = 2000
+        worker_index = 0
+        # ---------------------------------------
         self.clientAddr = clientAddr
         self.xpHost = xpHost
         self.xpPort = xpPort
@@ -30,7 +40,7 @@ class XplaneEnv(gym.Env):
         self.max_episode_steps = max_episode_steps
         self.statelength = 7
         self.actions = [0,0,0,0]
-        self.test=test
+
         self.resetTimeStep = 0
         self.total_time_step = 0
         self.gen_drefs = parameters.get_general_datarefs()
