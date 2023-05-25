@@ -74,6 +74,11 @@ aşağıdaki gibidir.
 #### GYM ortamı
 ```
 pip install --upgrade pip
+pip install --upgrade setuptools
+```
+
+```
+cd gym_xplane
 pip install -e .
 ```
 
