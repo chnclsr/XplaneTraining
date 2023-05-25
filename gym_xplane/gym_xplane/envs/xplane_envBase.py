@@ -35,7 +35,7 @@ class XplaneEnv(gym.Env):
         self.total_time_step = 0
         self.gen_drefs = parameters.get_general_datarefs()
         self.comms = parameters.get_commands()
-        self.client = xpc.XPlaneConnect()
+        self.client = xpc.XPlaneConnect(port=self.clientPort)
         # Verify connection
         try:
             # If X-Plane does not respond to the request, a timeout error
