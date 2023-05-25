@@ -11,7 +11,6 @@ import matplotlib.pyplot as plt
 from memory import Memory
 from actoc_ciritic import Actor, Critic
 import wandb
-import gym_xplane
 
 parser = argparse.ArgumentParser(description='PyTorch A2C solution of CartPole-v0')
 parser.add_argument('--gamma', type=float, default=0.99)

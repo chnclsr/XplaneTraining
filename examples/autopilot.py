@@ -1,7 +1,4 @@
-import sys
-import gym_xplane
 import xpc
-import pid
 from pid import PID
 from datetime import datetime, timedelta
 update_interval = 0.100 # seconds

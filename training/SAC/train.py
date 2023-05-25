@@ -2,7 +2,6 @@ import gym
 import numpy as np
 from Discrete_SAC_Agent import SACAgent
 import os
-import gym_xplane
 import wandb
 
 TRAINING_EVALUATION_RATIO = 4

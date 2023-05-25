@@ -1,16 +1,10 @@
 
 import tensorflow as tf
-import numpy as np
 import gym
-import matplotlib.pyplot as plt
 import numpy as np
 import sklearn.pipeline
 from sklearn.kernel_approximation import RBFSampler
-from collections import deque
-import random
 import os
-import gym_xplane
-
 
 NUM_EPISODES = 10
 LEARNING_RATE_ACTOR = 0.0001

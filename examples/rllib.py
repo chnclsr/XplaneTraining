@@ -3,12 +3,8 @@ from __future__ import division
 from __future__ import print_function
 
 import ray
-from ray.rllib.agents.ppo import PPOAgent
-from ray.tune import run_experiments
-import gym_xplane
-import p3xpc 
 import argparse
-from ray.tune import run_experiments, grid_search
+from ray.tune import run_experiments
 
 import gym
 

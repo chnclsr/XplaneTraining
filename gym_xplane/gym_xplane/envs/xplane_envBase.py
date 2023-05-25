@@ -1,11 +1,10 @@
 import gym
-from scipy.spatial.distance import pdist
-from gym_xplane import xpc
-import gym_xplane.parameters as parameters
-import gym_xplane.space_definition as envSpaces
+from .. import xpc
+import gym_xplane.gym_xplane.parameters as parameters
+import gym_xplane.gym_xplane.space_definition as envSpaces
 import numpy as np
 import time
-from gym import spaces, logger
+from gym import spaces
 from .observation import XPlaneObserver
 from .reward import XPlaneRewarder
 from. application import XPlaneApplier

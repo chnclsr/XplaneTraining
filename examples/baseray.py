@@ -1,7 +1,7 @@
 import ray
 from ray.tune.registry import register_env
 from ray.rllib.agents.ppo import PPOAgent
-import gym_xplane
+
 
 def env_creator(env_config):
     import gym

@@ -11,8 +11,6 @@ from __future__ import print_function
 import ray
 from ray.rllib.agents.ppo import PPOAgent
 from ray.tune import run_experiments
-import gym_xplane
-import gym 
 from ray.tune.registry import register_env
 
 
@@ -24,8 +22,6 @@ def env_creator(env_config):
 
 def my_train_fn(config, reporter):
     # Train for 100 iterations with high LR
-    import gym
-    import gym_xplane
     env_creator_name = "gymXplane-v2"
     #env = gym.make("gymXplane-v2")
     register_env(env_creator_name, env_creator)

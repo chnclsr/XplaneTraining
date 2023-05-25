@@ -1,15 +1,12 @@
 import argparse
 
-import gym_xplane
-import p3xpc 
 import gym
 import os
 import time
 
-from stable_baselines.common.policies import MlpPolicy,LstmPolicy
+from stable_baselines.common.policies import MlpPolicy
 from stable_baselines.common.vec_env import DummyVecEnv
 from stable_baselines import PPO2
-from stable_baselines.common.vec_env import SubprocVecEnv
 from stable_baselines.bench import Monitor
 
 

@@ -1,25 +1,19 @@
-import os
-import glob
-import time
-import gym_xplane
-import argparse
 from datetime import datetime
 import torch
 import numpy as np
 import gym
 from ppo import PPO
-import wandb
 import os
 
 ################################### Training ###################################
 def train():
-    print("initialize Wandb")
-    os.environ["WANDB_MODE"] = "online"
-    os.environ["WANDB_API_KEY"] = "48454db87872b0da16c749491c7e362e5933ceee"
-    user = "calisircihan21"
-    project = "XPlane11"
-    display_name = "Xplane11Training_PPO_1"
-    wandb.init(entity=user, project=project, name=display_name)
+    # print("initialize Wandb")
+    # os.environ["WANDB_MODE"] = "online"
+    # os.environ["WANDB_API_KEY"] = "48454db87872b0da16c749491c7e362e5933ceee"
+    # user = "calisircihan21"
+    # project = "XPlane11"
+    # display_name = "Xplane11Training_PPO_1"
+    # wandb.init(entity=user, project=project, name=display_name)
     print("============================================================================================")
     has_continuous_action_space = False  # continuous action space; else discrete
     max_ep_len = 150  # max timesteps in one episode
@@ -147,7 +141,7 @@ def train():
         print_running_reward += current_ep_reward
         print_running_episodes += 1
         print("episode reward: {} last 10 ep. mean: {}".format(episodeRewards[-1], np.mean(episodeRewards[-10:])))
-        wandb.log({"episodeReward": current_ep_reward, "episode":i_episode})
+        # wandb.log({"episodeReward": current_ep_reward, "episode":i_episode})
 
         log_running_reward += current_ep_reward
         log_running_episodes += 1

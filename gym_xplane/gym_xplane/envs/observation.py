@@ -1,9 +1,5 @@
-import os
-import numpy as np
-import math
-from datetime import datetime
 # import gym_xplane.parameters as params
-import gym_xplane.parameters2 as params
+import gym_xplane as params
 from .keywords import *
 from .vehicle import Aircraft, Global
 
