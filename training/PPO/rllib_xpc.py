@@ -2,7 +2,7 @@ import time
 from ray.tune.registry import register_env
 import ray
 import ray.rllib.agents.ppo as ppo
-from gym_xplane.envs.xplane_envBase import XplaneEnv
+from gym_xplane.gym_xplane.envs.xplane_envBase import XplaneEnv
 import gym_xplane
 # def start_xplane(start):
 #     if start:
@@ -131,8 +131,8 @@ def main ():
             config=config_t,
             # a directory where results are stored before being
             # sync'd to head node/cloud storage
-            local_dir="/home/autodidactic/Xplane-ray-0.25",
-            #restore='/home/autodidactic/Xplane-ray/DDPPO/DDPPO_gymXplane-v2_fec45_00000_0_2022-05-18_17-58-36',
+            local_dir="/home/pc_3971/Desktop/Cihan/Xplane-ray-0.25",
+            #restore='/home/pc_3971/Desktop/Cihan/Xplane-ray/DDPPO/DDPPO_gymXplane-v2_fec45_00000_0_2022-05-18_17-58-36',
             checkpoint_freq=25,  # iterations
             checkpoint_at_end=True,
         )

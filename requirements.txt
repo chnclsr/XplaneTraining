@@ -7,5 +7,10 @@ torchaudio~=0.12.0
 torchvision~=0.13.0
 wandb~=0.13.7
 scipy~=1.9.3
-ray[default,tune,rllib,serve]~=2.0.0
 numpy~=1.23.5
+
+# hepsi kurulduktan sonra
+#ray[default,tune,rllib,serve]~=2.0.0
+
+
+# !!!! numpy 1.23.5

@@ -46,7 +46,7 @@ if __name__ == "__main__":
     # parser.add_argument('--clientPort', help='client port', default=1)
     
     #args = parser.parse_args()
-    ray.init(object_store_memory=10000000,redis_max_memory=10000000)
+    ray.init(object_store_memory=10000000, redis_max_memory=10000000)
     #env = xp.xplane_Env_run(args.clientAddr, args.xpHost, args.xpPort,args.clientPort)
     
     #pic = pickle.dumps(client)

@@ -1,7 +1,7 @@
 import gym
 from .. import xpc
-import gym_xplane.parameters as parameters
-import gym_xplane.space_definition as envSpaces
+import gym_xplane.gym_xplane.parameters as parameters
+import gym_xplane.gym_xplane.space_definition as envSpaces
 import numpy as np
 import time
 from gym import spaces
@@ -91,6 +91,7 @@ class XplaneEnv(gym.Env):
 
     def step(self, action):
         self.time_step += 1
+        # print(self.time_step)
         self.total_time_step += 1
         state, reward, done, _ = self.ministep(action)
         return state, reward, done, _
@@ -159,7 +160,7 @@ class XplaneEnv(gym.Env):
 
         self.client.sendVIEW(xpc.ViewType.Chase)  # external view
         gear = 0  # 0:down, 1:up
-        values = [47.18, -122.307753, 10000, 0, self.rollAngleList[np.random.randint(13)], 180, 0]  # Seattle Tacoma Airport coordinates, self.rollAngleList[np.random.randint(13)]
+        values = [47.18, -122.307753, 3000, 0, self.rollAngleList[np.random.randint(13)], 180, 0]  # Seattle Tacoma Airport coordinates, self.rollAngleList[np.random.randint(13)]
         # print("102")
 
         self.client.sendPOSI(values, 0)  # respawn at starting point
