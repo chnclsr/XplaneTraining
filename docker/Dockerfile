@@ -141,7 +141,7 @@ EXPOSE 49009
 # 
 
 # xvfb ile sanal XServer aç, vglrun ile XPlane'i GPU'ya yönlendir
-# xvfb-run -a -s "-screen 0 1920x1080x24" env VGL_DISPLAY=$DISPLAY vglrun XPlane11/run > /dev/null &
+# xvfb-run -a -s "-screen 0 1920x1080x24" env VGL_DISPLAY=$DISPLAY vglrun XPlane11/run --no_sound > /dev/null &
 CMD ./runXPlane11.sh ; sleep infinity
 
 

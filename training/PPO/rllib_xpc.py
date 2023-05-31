@@ -54,7 +54,7 @@ def main ():
     config_t['num_gpus'] = 0
     config_t['num_workers'] = 1
     config_t['framework'] = 'torch'
-    config_t['num_gpus_per_worker'] = 0.0 #don't use GPU
+    config_t['num_gpus_per_worker'] = 0.1 #don't use GPU
     config_t['num_cpus_per_worker'] = 1
     config_t["train_batch_size"] = 2000 # for PPO
     config_t["rollout_fragment_length"] = 1000
