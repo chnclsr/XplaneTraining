@@ -1,0 +1,304 @@
+#FROM ubuntu:18.04 as base                 
+
+
+
+# Use a base image with NVIDIA GPU support
+FROM nvidia/cudagl:11.0-base-ubuntu20.04
+USER root
+
+RUN rm /etc/apt/sources.list.d/cuda.list
+#RUN rm /etc/apt/sources.list.d/nvidia-ml.list
+RUN apt-key del 7fa2af80
+RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub
+RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64/7fa2af80.pub
+
+# Set environment variables
+ENV DEBIAN_FRONTEND noninteractive
+
+# Install sudo package
+RUN apt-get update && apt-get -y install sudo
+
+RUN sudo apt-get update
+#RUN sudo apt-get install -y nvidia-container-toolkit
+
+
+
+
+# Install required dependencies
+RUN sudo apt-get update && apt-get install -y \
+    curl \
+    libgl1-mesa-glx \
+    libxcursor1 \
+    libxi6 \
+    libxinerama1 \
+    libxrandr2 \
+    libxcomposite1 \
+    libusb-1.0-0-dev \
+    libpulse0 \
+    pulseaudio \
+    x11-xserver-utils \
+    && rm -rf /var/lib/apt/lists/*
+
+
+
+
+
+
+
+RUN mkdir -p /work
+WORKDIR /work
+
+COPY XPlane11 XPlane11
+COPY runXPlane11.sh .
+RUN chmod +x runXPlane11.sh
+
+RUN sudo apt-get update -y && \
+    apt-get install -y libglu1 && \ 
+    apt-get install -y libpangoxft-1.0-0 && \ 
+    apt-get install -y libgtk2.0-0
+
+
+
+# installation
+RUN  apt-get update  -y && \
+     apt-get install  -y software-properties-common && \
+     apt-get install -y xvfb &&  \
+     apt-get install -y xserver-xephyr nano
+      
+
+
+
+# -------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------
+# ---------------------------------- install vglrun
+# -------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------
+
+ARG SOURCEFORGE=https://sourceforge.net/projects
+ARG TURBOVNC_VERSION=2.1.2
+ARG VIRTUALGL_VERSION=2.5.2
+ARG LIBJPEG_VERSION=1.5.2
+ARG WEBSOCKIFY_VERSION=0.8.0
+ARG NOVNC_VERSION=1.0.0
+ARG LIBARMADILLO_VERSION=6
+
+RUN apt-get update  -y && \
+    apt-get install -y x11-xkb-utils xauth xfonts-base xkb-data \
+    mesa-utils xvfb libgl1-mesa-dri libgl1-mesa-glx libglib2.0-0 libxext6 libsm6 libxrender1 \
+    libglu1 libglu1:i386 libxv1 libxv1:i386
+    
+    
+RUN cd /tmp && \
+    curl -fsSL -O ${SOURCEFORGE}/turbovnc/files/${TURBOVNC_VERSION}/turbovnc_${TURBOVNC_VERSION}_amd64.deb \
+    -O ${SOURCEFORGE}/libjpeg-turbo/files/${LIBJPEG_VERSION}/libjpeg-turbo-official_${LIBJPEG_VERSION}_amd64.deb \
+    -O ${SOURCEFORGE}/virtualgl/files/${VIRTUALGL_VERSION}/virtualgl_${VIRTUALGL_VERSION}_amd64.deb \
+    -O ${SOURCEFORGE}/virtualgl/files/${VIRTUALGL_VERSION}/virtualgl32_${VIRTUALGL_VERSION}_amd64.deb && \
+    dpkg -i *.deb && \
+    rm -f /tmp/*.deb && \
+    sed -i 's/$host:/unix:/g' /opt/TurboVNC/bin/vncserver
+
+# -------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------
+
+
+RUN apt-get update \
+    && apt-get install -y libgl1-mesa-dri libglapi-mesa libglx-mesa0 libglx0 libgl1 libgl1-mesa-glx libglu1-mesa
+
+
+# Set up audio output (optional)
+RUN echo "default_source = alsa_input.usb-*" >> X-Plane.prf \
+    && echo "default_sink = alsa_output.usb-*" >> X-Plane.prf
+
+
+
+
+# Set the display environment variable for X-Plane
+ENV DISPLAY=:0
+
+
+#ENTRYPOINT ["xvfb-run"] # entry point 
+#CMD ["--server-args=':1 -screen 0, 1024x768x16'", "/work/XPlane11/run > /dev/null &"] # command flags
+
+
+#CMD ["/work/XPlane11/run > /dev/null"] 
+
+# xvfb-run XPlane11/run --no_sound > /dev/null & # terminal returned
+
+EXPOSE 49009
+
+
+
+# !!!  https://virtualgl.org/Documentation/HeadlessNV
+
+# container içinde bu adımları yap;
+# sudo vglserver_config 
+# cevaplar: 1-no-no-yes-x
+# 
+
+# xvfb ile sanal XServer aç, vglrun ile XPlane'i GPU'ya yönlendir
+# xvfb-run -a -s "-screen 0 1920x1080x24" env VGL_DISPLAY=$DISPLAY vglrun XPlane11/run > /dev/null &
+CMD ./runXPlane11.sh ; sleep infinity
+
+
+
+
+# xhost +local:docker
+# docker run --network host --privileged --gpus all --name xp11_ins_1 -e DISPLAY=$DISPLAY -v /#tmp/.X11-unix:/tmp/.X11-unix -di xplanehost 
+
+
+# host ile XPlane 11 başlatır
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# install Nvidia drivers to local
+# distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+# curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+# curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/#apt/sources.list.d/nvidia-docker.list
+
+# sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+# sudo systemctl restart docker
+
+
+# xhost +x
+#docker stop xp11_ins_1 && docker rm xp11_ins_1 && docker run --network host --privileged --gpus all --name xp11_ins_1 -it -e DISPLAY=$DISPLAY -v /#tmp/.X11-unix:/tmp/.X11-unix xplane_b bash
+
+#chmod +x XPlane11/run 
+# XPlane11/run --no_sound
+
+
+# docker network create xplanet
+
+
+# docker run --network xplanet --privileged --gpus all --name xp11_ins_1 -e DISPLAY=$DISPLAY -v /#tmp/.X11-unix:/tmp/.X11-unix xplane11
+
+
+
+
+
+
+
+
+# docker run --network xplanet --ip 172.19.0.2 --gpus='all,"capabilities=compute,utility,graphics,display"' --name xp11_ins_1 -it -p 80:80 -p 1338:1338 -v /#tmp/.X11-unix:/tmp/.X11-unix xplane bash
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# docker stop xp11_ins_2 && docker rm xp11_ins_2 && docker run --network xplanet --privileged --gpus all --name xp11_ins_2 -it -e DISPLAY=$DISPLAY -v /#tmp/.X11-unix:/tmp/.X11-unix xplane_b bash
+
+
+#RUN apt-get update && \
+#      apt-get -y install sudo
+
+
+################### Run required installation and set Work directory##################
+# installation
+#RUN apt-get update  -y && \
+#     apt-get install  -y software-properties-common && \
+#     apt-get install -y xvfb &&  \
+#     apt-get install -y xvfb xserver-xephyr  &&  \
+#     apt-get install -y vnc4server &&  \
+#     apt-get install -y p7zip-full   \
+#      && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+ 
+#RUN sudo apt-get update -y && \
+#    apt-get install -y libglu1 && \ 
+#    apt-get install -y libpangoxft-1.0-0 && \ 
+#    apt-get install -y libgtk2.0-0 && \ 
+ 
+     
+# work drectory
+#RUN mkdir -p /work
+#WORKDIR /work
+
+#COPY XPlane11 XPlane11
+
+
+
+######################################## Run in headlessmode ##########################
+# run the simulation in headless mode
+# CMD /work/XPlaneBashFile.sh # either use a script using this syntax
+# CMD ["chmod", "+x", ".63./XPlaneBashFile.sh"] ## either use a script using this oter syntax
+####### the preferred way to start the simulation in headless mode
+#ENTRYPOINT ["xvfb-run"] # entry point 
+#CMD ["--server-args=':1 -screen 0, 1024x768x16'", "/work/X-Plane\ 11/X-Plane-x86_64 > /dev/null &"] # command flags
+########################################################################################
+
+######################################## Declare port ##########################
+# Declare xplane port to enable connection with gym xplane
+#EXPOSE 49009
+########################################################################################
+
+# Copy X-Plane 11 files from the local directory to the container
+
+
+# Set the entrypoint for running X-Plane 11
+#ENTRYPOINT ["/usr/bin/xhost", "+"]   # Grant access to the X server
+#CMD ["X-Plane/run"]
+
