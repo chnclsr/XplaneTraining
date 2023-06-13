@@ -44,8 +44,8 @@ class XplaneEnv(gym.Env):
         self.gen_drefs = parameters.get_general_datarefs()
         self.comms = parameters.get_commands()
         print("ray envyi cagirdi")
-        # self.client = xpc.XPlaneConnect(xpHost="172.18.0.{}".format(worker_index+1), port=self.clientPort)
-        self.client = xpc.XPlaneConnect(port=self.clientPort)
+        self.client = xpc.XPlaneConnect(xpHost="172.18.0.{}".format(worker_index+1), port=self.clientPort)
+        # self.client = xpc.XPlaneConnect(port=self.clientPort)
         # Verify connection
         try:
             # If X-Plane does not respond to the request, a timeout error
@@ -74,9 +74,9 @@ class XplaneEnv(gym.Env):
         self.sensor_worker_action_space = spaces.Discrete(self.applier.get_size()[3])   # throttle worker: 11
 
         self.episode = 0
-        self.time_step_limit = 250
+        self.time_step_limit = 50
 
-        self.rollAngleList = np.linspace(-45, 45, 13)
+        self.rollAngleList = np.linspace(-15, 15, 13)
 
         self.preState = None
         self.pre_phi = None
@@ -106,7 +106,7 @@ class XplaneEnv(gym.Env):
         # print("actionnnnnnnn")
         # send selected action
         self.apply_action(action) # {'ai_actions':[], 'pilot_action':[]}
-        time.sleep(0.1)
+        time.sleep(0.25)
         # get next state
         # print("action geçildiiiiiiiiiii")
 
@@ -161,8 +161,10 @@ class XplaneEnv(gym.Env):
 
     def respawnController(self):
         crashed = bool(self.client.getDREF("sim/flightmodel2/misc/has_crashed")[0])
+        counter = 0
         while crashed:
-            print("waiting sim!")
+            counter += 1
+            print("waiting sim - log num:  ", counter)
             crashed = bool(self.client.getDREF("sim/flightmodel2/misc/has_crashed")[0])
         return crashed
 
@@ -172,21 +174,18 @@ class XplaneEnv(gym.Env):
         print("RESET")
         self.client.sendDREF("sim/operation/prefs/reset_on_crash", 1)  # reset flight to most recent start
         self.client.sendCOMM("sim/operation/reset_flight")
-
-        #self.client.sendCOMM("sim/operation/reset_flight")  # reset flight to most recent start
-        #self.client.sendCOMM("sim/operation/reset_to_runway")  # reset flight to most recent start
-
-        # print("99")
-
-        self.client.sendVIEW(xpc.ViewType.Chase)  # external view
         time.sleep(.25)
         gear = 0  # 0:down, 1:up
-        values = [47.18, -122.307753, 1000, 0, self.rollAngleList[np.random.randint(13)], 180, 0]  # Seattle Tacoma Airport coordinates, self.rollAngleList[np.random.randint(13)]
+        values = [40.87744903564453, 28.83745765686035, 1000, 0, self.rollAngleList[np.random.randint(13)], 180, 0]  # Seattle Tacoma Airport coordinates, self.rollAngleList[np.random.randint(13)]
         # print("102")
 
         self.client.sendPOSI(values, 0)  # respawn at starting point
-        time.sleep(.25)
-
+        time.sleep(0.5)
+        self.client.sendDREF(self.gen_drefs["local_vz"], np.array([250], dtype="float32")[0])
+        time.sleep(0.25)
+        self.client.sendVIEW(xpc.ViewType.Chase)  # external view
+        time.sleep(0.25)
+        # self.client.pauseSim(False)
         # values1 = [47.163639, -122.307753, 1200, 0, 0, 0, 0]  # Seattle Tacoma Airport coordinates
         # self.client.sendPOSI(values1, 1)  # respawn at starting point
         # time.sleep(.25)
@@ -198,37 +197,6 @@ class XplaneEnv(gym.Env):
 
         # time.sleep(4)
         if state_c:
-            accessed = False
-            while not accessed:
-                # print("posssssssss")
-                posi = self.client.getPOSI()
-                print(posi)
-                if (posi[2] < values[2] + 100) and (posi[2] > values[2] - 100):
-                    accessed = True
-                    print("reset succeded")
-                    time.sleep(.25)
-                    # print("posi:", posi)
-                else:
-                    self.client.sendPOSI(values, 0)
-                    # self.client.sendPOSI(values1, 1)
-                    # self.client.sendPOSI(values2, 2)
-                    self.client.sendVIEW(xpc.ViewType.Chase)
-                    print("reset failed")
-                    time.sleep(.25)
-
-            # onground_any = self.client.getDREF(self.gen_drefs["onground_any"])[0][0]
-            # accessed = False
-            # while not accessed:
-            #     if onground_any == True:
-            #         print("reset failed")
-            #         self.client.sendPOSI(values, 0)
-            #     else:
-            #         accessed = True
-            #         print("reset succeded")
-            time.sleep(2)
-            self.client.sendDREF(self.gen_drefs["local_vz"], np.array([250], dtype="float32")[0])  # give initial speed
-            time.sleep(.25)
-            print("hız gönderildi")
             self.time_step = 0
             self.episode += 1
             print("state alındı")

@@ -42,9 +42,9 @@ class XPlaneApplier():
 
     def apply_control(self):
         heading = self.interpret(self.aileron_smntcs, self.aileron_action) # kanat üstü üniteler
-        rudder = 0.3 #self.interpret(self.elevator_smntcs, self.elevator_action) #arka kuytukdaki rudderlar
+        rudder = 0.0 #self.interpret(self.elevator_smntcs, self.elevator_action) #arka kuytukdaki rudderlar
         verticalStabilizer_point = 0.0 #self.interpret(self.rudder_smntcs, self.rudder_action) # TB2' ve AKINCI'da dikey stabilleştirici olmadığından 0
-        speed = np.random.choice([0, 1], p=[0.4, 0.6])  #self.interpret(self.throttle_smntcs, self.throttle_action) #hız
+        speed = 0.0 #np.random.choice([0, 1], p=[0.9, 0.1])  #self.interpret(self.throttle_smntcs, self.throttle_action) #hız
         control = [rudder, heading, verticalStabilizer_point, speed, 0, 0] # elevator, aileron, rudder, throttle, gear, flaps
         self.client.sendCTRL(control)
 

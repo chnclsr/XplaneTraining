@@ -52,7 +52,7 @@ def main ():
     config_t["kl_coeff"] = 0
     config_t["kl_target"] = 0
     config_t['num_gpus'] = 0
-    config_t['num_workers'] = 1
+    config_t['num_workers'] = 2
     config_t['framework'] = 'torch'
     config_t['num_gpus_per_worker'] = 0.1 #don't use GPU
     config_t['num_cpus_per_worker'] = 1
