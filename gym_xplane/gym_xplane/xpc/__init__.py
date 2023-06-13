@@ -6,7 +6,7 @@ class XPlaneConnect(object):
     socket = None
 
     # Basic Functions
-    def __init__(self, xpHost='localhost', xpPort=49009, port=8081, timeout=15):
+    def __init__(self, xpHost='localhost', xpPort=49009, port=8082, timeout=15):
         """Sets up a new connection to an X-Plane Connect plugin running in X-Plane.
 
             Args:
@@ -32,7 +32,8 @@ class XPlaneConnect(object):
 
         # Setup XPlane IP and port
         self.xpIP = xpIP
-        self.xpDst = (xpIP, xpPort)
+        self.xpDst = (self.xpIP, xpPort)
+        print(self.xpDst)
 
         # Create and bind socket
         clientAddr = ("0.0.0.0", port)

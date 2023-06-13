@@ -17,7 +17,7 @@ sudo nvidia-xconfig -a --allow-empty-initial-configuration --use-display-device=
 ```
 docker build -t xplane_gpu .
 xhost +local:docker
-docker run --network host --privileged --gpus all --name xp11_ins_1 -e DISPLAY=$DISPLAY -v /#tmp/.X11-unix:/tmp/.X11-unix -di xplanehost
+docker run --network host --privileged --gpus all --name xp11_ins_1 -e DISPLAY=$DISPLAY -v /#tmp/.X11-unix:/tmp/.X11-unix -di xplane_gpu
 ```
 
 İlk kurulumda lisans aktifleştirme için gerekli

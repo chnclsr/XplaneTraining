@@ -51,6 +51,7 @@ WORKDIR /work
 COPY XPlane11 XPlane11
 COPY runXPlane11.sh .
 RUN chmod +x runXPlane11.sh
+RUN chmod +x run_vnc.sh
 
 RUN sudo apt-get update -y && \
     apt-get install -y libglu1 && \ 
@@ -107,7 +108,7 @@ RUN cd /tmp && \
 
 
 RUN apt-get update \
-    && apt-get install -y libgl1-mesa-dri libglapi-mesa libglx-mesa0 libglx0 libgl1 libgl1-mesa-glx libglu1-mesa
+    && apt-get install -y libgl1-mesa-dri libglapi-mesa libglx-mesa0 libglx0 libgl1 libgl1-mesa-glx libglu1-mesa x11vnc
 
 
 # Set up audio output (optional)
@@ -142,20 +143,24 @@ EXPOSE 49009
 
 # xvfb ile sanal XServer aç, vglrun ile XPlane'i GPU'ya yönlendir
 # xvfb-run -a -s "-screen 0 1920x1080x24" env VGL_DISPLAY=$DISPLAY vglrun XPlane11/run --no_sound > /dev/null &
+
+#!/bin/bash
+
+
+
+
 CMD ./runXPlane11.sh ; sleep infinity
 
 
 
 
 # xhost +local:docker
-# docker run --network host --privileged --gpus all --name xp11_ins_1 -e DISPLAY=$DISPLAY -v /#tmp/.X11-unix:/tmp/.X11-unix -di xplanehost 
-
-
+# docker run --network host --privileged --gpus all --name xp11_ins_1 -e DISPLAY=$DISPLAY -v /#tmp/.X11-unix:/tmp/.X11-unix -di xplanehost
 # host ile XPlane 11 başlatır
 
 
-
-
+# usr defined net ile başlatır
+# docker run --network xplanet --ip 172.19.0.20 --privileged --gpus all --name xp11_ins_1 -e DISPLAY=$DISPLAY -v /#tmp/.X11-unix:/tmp/.X11-unix -di xplane_cpu
 
 
 

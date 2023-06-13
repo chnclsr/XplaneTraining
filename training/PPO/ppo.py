@@ -85,7 +85,7 @@ class ActorCritic(nn.Module):
             dist = MultivariateNormal(action_mean, cov_mat)
         else:
             out = self.actor(state)
-            heading_action_probs = torch.nn.Softmax(dim=-1)(torch.nn.Linear(64, self.multiDisActionNums[0].n)(out))
+            heading_action_probs = torch.nn.Softmax(dim=-1)(torch.nn.Linear(64, self.multiDisActionNums.n)(out))
             # rudder_action = Categorical(torch.nn.Softmax(dim=-1)(torch.nn.Linear(64, self.multiDisActionNums[0].n)(out)))
             # speed_action = Categorical(torch.nn.Softmax(dim=-1)(torch.nn.Linear(64, self.multiDisActionNums[0].n)(out)))
             dist = Categorical(heading_action_probs)
