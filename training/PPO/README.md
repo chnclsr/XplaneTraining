@@ -36,10 +36,6 @@ Başka bir terminal açıp;
 #home$> docker run --network xplanet --shm-size 2gb --ip 172.18.0.2 --gpus all --name xp11_ins_1 -e DISPLAY=$DISPLAY -v /#tmp/.X11-unix:/tmp/.X11-unix -P -di xplane-image:1
 ```
 
-```
-#home$> docker pull xp11_ins_1 xplane-image:1 # Bunu her instance için tekrarla
-#home$> exit
-```
 
 
 "Subnet": "172.18.0.0/16", "Gateway": "172.18.0.1" olduğundan 0.2 ile devam ediyor. Sabit
