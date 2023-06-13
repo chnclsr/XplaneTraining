@@ -162,6 +162,7 @@ class XplaneEnv(gym.Env):
     def respawnController(self):
         crashed = bool(self.client.getDREF("sim/flightmodel2/misc/has_crashed")[0])
         while crashed:
+            print("waiting sim!")
             crashed = bool(self.client.getDREF("sim/flightmodel2/misc/has_crashed")[0])
         return crashed
 

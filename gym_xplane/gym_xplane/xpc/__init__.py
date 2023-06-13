@@ -6,7 +6,7 @@ class XPlaneConnect(object):
     socket = None
 
     # Basic Functions
-    def __init__(self, xpHost='localhost', xpPort=49009, port=8082, timeout=15):
+    def __init__(self, xpHost='localhost', xpPort=49009, port=8082, timeout=5):
         """Sets up a new connection to an X-Plane Connect plugin running in X-Plane.
 
             Args:
@@ -72,7 +72,11 @@ class XPlaneConnect(object):
         """Reads a message from the underlying UDP socket."""
         out = None
         while out == None:
-            out = self.socket.recv(163840)
+            try:
+                out = self.socket.recv(163840)
+            except:
+                #TODO: 30 saniye sonra ayağa kalkmazsa OS'den XPlane11'i kapat, aç
+                v = 0
         return out
 
     # Configuration
