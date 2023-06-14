@@ -5,6 +5,7 @@ import gym
 from ppo import PPO
 import os
 import gym_xplane.gym_xplane
+
 ################################### Training ###################################
 def train():
     # print("initialize Wandb")

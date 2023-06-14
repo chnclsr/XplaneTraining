@@ -25,8 +25,9 @@ class XPlaneRewarder():
         similarity = np.exp(-pairwise_dists ** 2 / sigma ** 2)
         return pairwise_dists
 
-# distance rel enemyhit  f g h     y([d r ene]) = y
+    # distance rel enemyhit  f g h     y([d r ene]) = y
     def distance_reward(self, distance):
+        reward = 0
         try:
             reward = 1 - (distance / 50000)
         except:
@@ -41,33 +42,33 @@ class XPlaneRewarder():
         #TODO: step reward: P Q R yüksekse ceza -0.001
         #TODO: PQR ye gerek olmayabilir
         reward = 0
-        # self_info = self.info_store[0]
-        # target_info = self.info_store[1] # 1:F-4 Phantom 2:Baron
+        self_info = self.info_store[0]
+        target_info = self.info_store[1] # 1:F-4 Phantom 2:Baron
 
-        # if abs(self_info['P']) > 45: # -300 +300
-        #     reward -= 0.001
-        # if abs(self_info['Q']) > 45: # -100 +100
-        #     reward -= 0.001
-        # if abs(self_info['R']) > 45: # -200 -200
-        #     reward -= 0.001
-        #
-        # #if abs(self_info['phi']) > 30:
-        # reward += self.linear(abs(self_info['phi']), 90)/10
-        # reward += self.linear(abs(self_info['theta']), 90)/10
-        # reward -= self.linear(abs(self_info['psi']-180), 180)/10
+        if abs(self_info['P']) > 45: # -300 +300
+            reward -= 0.001
+        if abs(self_info['Q']) > 45: # -100 +100
+            reward -= 0.001
+        if abs(self_info['R']) > 45: # -200 -200
+            reward -= 0.001
 
-        # #TODO: rel bearing
+        #if abs(self_info['phi']) > 30:
+        reward += self.linear(abs(self_info['phi']), 90)/10
+        reward += self.linear(abs(self_info['theta']), 90)/10
+        reward -= self.linear(abs(self_info['psi']-180), 180)/10
+
         # target_info = self.info_store[1]  # 1:F-4 Phantom 2:Baron
-        # r_bearing = self.linear(abs(target_info['rel_bearing']), 90) / 10
-        # reward += r_bearing
+        r_bearing = self.linear(abs(target_info['rel_bearing']), 90) / 10
+        reward += r_bearing
 
-        opinion = 0 #self.instructor() # ask to instructor in every step
-        reward += opinion
+        # opinion = 0 #self.instructor() # ask to instructor in every step
+        # reward += opinion
         return reward
 
+    """
     def episode_reward(self): # end of episode
         #TODO: episode bitiminde düşmana ne kadar yaklaşabildin ödülünü büyüterek(x10) ver.
-        #TODO: episode sonu reward- relative bearing ve (relative)elevation için distance'taki yaklaşım kullanılacak
+        #TODO: episode sonu reward - relative bearing ve (relative)elevation için distance'taki yaklaşım kullanılacak
 
         # 1:F-4 Phantom 2:Baron
         pos_attrs = self.observer.attrs['position']
@@ -94,7 +95,9 @@ class XPlaneRewarder():
         # reward = distance + r_elevation + crash_rew
         reward = distance + crash_rew
         return reward
+    """
 
+    """
     def instructor(self):
         ai_action = self.applier.action_         # [aileron, elevator, rudder, throttle, weapon, message]
         pilot_action = self.applier.pilot_action # [aileron, elevator, rudder, throttle, weapon, message]
@@ -128,24 +131,28 @@ class XPlaneRewarder():
         opinion = (a * aileron_sim) + (e * elevator_sim) + (r * rudder_sim) + (t * throttle_sim)
         # print("aileron_sim:{}  elevator_sim:{}  rudder_sim:{}  throttle_sim:{}    opinion:{}".format(aileron_sim,elevator_sim,rudder_sim,throttle_sim,opinion))
         return opinion
+    """
 
+    """
     def reward(self):
-        # self_info = self.info_store[0]
-        # target_info = self.info_store[1] # 1:F-4 Phantom 2:Baron
+        self_info = self.info_store[0]
+        target_info = self.info_store[1] # 1:F-4 Phantom 2:Baron
         #
-        # print("el:{} t_el:{} P:{} Q:{} R:{} the:{}  phi:{} psi:{} distance:{} rel_bearing:{}".format(
-        #     self_info['elevation'],
-        #     target_info['el'], self_info['P'], self_info['Q'], self_info['R'],
-        #     self_info['theta'], self_info['phi'], self_info['psi'],
-        #     target_info['distance'], target_info['rel_bearing']))
+        print("el:{} t_el:{} P:{} Q:{} R:{} the:{}  phi:{} psi:{} distance:{} rel_bearing:{}".format(
+            self_info['elevation'],
+            target_info['el'], self_info['P'], self_info['Q'], self_info['R'],
+            self_info['theta'], self_info['phi'], self_info['psi'],
+            target_info['distance'], target_info['rel_bearing']))
 
-        if self.done:
-            reward = self.episode_reward()
-        else:
-            reward = self.step_reward()
-        return [reward]*7
+        # if self.done:
+        #     reward = self.episode_reward()
+        # else:
+        #     reward = self.step_reward()
+        reward = self.step_reward()
+        return [reward]
+    """
 
-    def reward2(self, info_store):
+    def reward(self, info_store):
 
         self.info_store = info_store # update incoming stream
         int_info = self.info_store[0]
@@ -160,9 +167,10 @@ class XPlaneRewarder():
 
         # gps_dme_distance_nm = self.client.getDREF(self.gen_drefs["gps_dme_distance_nm"])[0][0]
         current_state = [heading, altitude]  # present situation -heading, altitude, and distance
+
         # if the heading and altitude are within small pertubation, set good reward, othewise penalize it.
-        #TODO: mtçs manevra ödülü gelebilir, heading vermek problem
         reward = self.gaussian_calculus(objective_state, current_state)[0]
+
         distance = self.info_store[2]["distance"]
         reward += self.distance_reward(distance)
 
@@ -182,6 +190,6 @@ class XPlaneRewarder():
             #TODO: -3 fena degil
             reward -= 3
 
-        return [reward]*7
+        return reward
 
     # TODO: fazla yüksekte ani hareketler yapıyorsa ceza olabilir. (P Q R değerlerine göre)

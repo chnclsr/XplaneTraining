@@ -11,6 +11,8 @@ class XPlaneApplier():
         self.initialize_semantics()
         self.action_ = None  # merged form (cont+disc)
         self.pilot_action = None
+        self.munition_count = 0
+        self.fired_action_count = 0
 
     def get_size(self):
         return self.action_size
@@ -41,14 +43,21 @@ class XPlaneApplier():
 
     def apply_control(self):
         heading = self.interpret(self.aileron_smntcs, self.aileron_action) # kanat üstü üniteler
-        rudder = 0.3 #self.interpret(self.elevator_smntcs, self.elevator_action) #arka kuytukdaki rudderlar
+        rudder = 0.3 #self.interpret(self.elevator_smntcs, self.elevator_action) #arka kuyrukdaki rudderlar
         verticalStabilizer_point = 0.0 #self.interpret(self.rudder_smntcs, self.rudder_action) # TB2' ve AKINCI'da dikey stabilleştirici olmadığından 0
         speed = np.random.choice([0, 1], p=[0.4, 0.6])  #self.interpret(self.throttle_smntcs, self.throttle_action) #hız
         control = [rudder, heading, verticalStabilizer_point, speed, 0, 0] # elevator, aileron, rudder, throttle, gear, flaps
         self.client.sendCTRL(control)
 
     def apply_tactic(self):
-        pass
+        self.fired_action_count += 1
+        if self.fired_action and self.fired_action_count < self.munition_count:
+            self.client.sendDREF("sim/joystick/fire_key_is_down", 0)
+            self.client.sendDREF("sim/cockpit/weapons/plane_target_index", 1)
+            self.client.sendDREF("sim/cockpit2/weapons/weapon_select_console_index", self.fired_action_count)
+            self.client.sendDREF("sim/joystick/fire_key_is_down", 1)
+
+
 
     def update(self, action):
         self.action_ = action #action.cont + action.disc # [speed heading altitude sensor] weapon message -> [aileron elevator rudder throttle]
@@ -57,6 +66,7 @@ class XPlaneApplier():
         # self.elevator_action = self.action_[1]
         # self.rudder_action = self.action_[2]
         # self.throttle_action = self.action_[3] # speed
+        self.fired_action = 0
 
     def apply(self, action):
         self.update(action)

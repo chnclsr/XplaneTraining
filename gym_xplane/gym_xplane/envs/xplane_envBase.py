@@ -131,7 +131,7 @@ class XplaneEnv(gym.Env):
         "calculate vhi angle changing WR2pre state and currrent state"
         abs_vhi = np.abs(self.v_phi)  # açı sıfırla tolerans aralığındaysa sıfıra yaklaştıkça ödül artar, Toleranstan büyük oldukça daha büyük ceza alır
         reward = -1 * ((abs_vhi - self.vhi_limit)/(180 - self.vhi_limit)) - 0.001
-        # reward = self.rewarder.reward()
+        reward = self.rewarder.reward() #TODO: info store
         return reward
 
     def get_state(self):
