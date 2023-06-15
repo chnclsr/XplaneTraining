@@ -3,7 +3,6 @@
 
 # Gereklilikler
 > tensorboard > # pip install tensorflow
-> 
 
 #### Eğitimi başlat
 Worker sayısına göre istenilen sayıda env aç

@@ -4,6 +4,9 @@ import ray
 import ray.rllib.agents.ppo as ppo
 from gym_xplane.gym_xplane.envs.xplane_envBase import XplaneEnv
 import gym_xplane
+from ray import tune
+from ray.rllib.agents.ppo.ppo import DEFAULT_CONFIG, PPOTrainer
+
 # def start_xplane(start):
 #     if start:
 #         import os
@@ -40,7 +43,7 @@ def main ():
     # time.sleep(10)
     ray.init(address='ray://10.0.135.54:10001')
 
-
+    trainingID = "3instances_roll_control"
     #register_env(select_env, lambda config: Fail_v1())
     n_gpus = int(ray.cluster_resources().get("GPU", 0))
     n_cpus = int(ray.cluster_resources().get("CPU", 0))
@@ -52,34 +55,20 @@ def main ():
     config_t["kl_coeff"] = 0
     config_t["kl_target"] = 0
     config_t['num_gpus'] = 0
-    config_t['num_workers'] = 2
+    config_t['num_workers'] = 3
     config_t['framework'] = 'torch'
     config_t['num_gpus_per_worker'] = 0.1 #don't use GPU
     config_t['num_cpus_per_worker'] = 1
-    config_t["train_batch_size"] = 2000 # for PPO
-    config_t["rollout_fragment_length"] = 1000
+    config_t["train_batch_size"] = 2100 # for PPO
+    config_t["rollout_fragment_length"] = 700
     # config_t["sgd_minibatch_size"] = 128
     config_t["num_sgd_iter"] = 10
     # config_t["record_env"] = False
     config_t["remote_worker_envs"] = False
     config_t["model"] = {"fcnet_activation":"tanh"}
-    config_t['env_config'] = {"closeHRLimit":config_t["rollout_fragment_length"]}
+    config_t['env_config'] = {"closeHRLimit": config_t["rollout_fragment_length"]}
 
     # config_t['local-mode'] = False
-
-    # instance_list = []
-    # for i in range(config["num_workers"]):
-    #     instance_list.append(instance_1[i])
-    #     if i > 2:
-    #         assert ">>>>>>>>>>>>>>>>>>>>>>>>>> max num: 3"
-    # # if config['num_workers'] == 2:
-    #     # instance_list.append("GKAY")
-    #
-    # config["env_config"] = \
-    #     {
-    #     "instance_list": instance_list,
-    #     }
-    # config["disable_env_checking"] = True
 
 
     # TRAIN
@@ -91,7 +80,6 @@ def main ():
         # register the custom environment
         select_env = "gymXplane-v2"
         # start_xplane("start")
-        # select_env = "fail-v1"
         register_env(select_env, lambda config: XplaneEnv(config))
         config_t["env"] = select_env
         trainer = PPOTrainer(config_t, select_env)
@@ -132,8 +120,8 @@ def main ():
             # a directory where results are stored before being
             # sync'd to head node/cloud storage
             local_dir="/home/pc_3971/Desktop/Cihan/Xplane-ray-0.25",
-            #restore='/home/pc_3971/Desktop/Cihan/Xplane-ray/DDPPO/DDPPO_gymXplane-v2_fec45_00000_0_2022-05-18_17-58-36',
-            checkpoint_freq=25,  # iterations
+            #restore="/home/pc_3971/Desktop/Cihan/Xplane-ray-0.25/PPO/deneme/checkpoint_000007",
+            checkpoint_freq=20,  # iterations
             checkpoint_at_end=True,
         )
 
