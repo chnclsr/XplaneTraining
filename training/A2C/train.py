@@ -67,8 +67,8 @@ memory = Memory(10000)
 def main():
     print("initialize Wandb")
     os.environ["WANDB_MODE"] = "online"
-    os.environ["WANDB_API_KEY"] = "48454db87872b0da16c749491c7e362e5933ceee"
-    user = "calisircihan21"
+    os.environ["WANDB_API_KEY"] = "cc"
+    user = "cc"
     project = "XPlane11"
     display_name = "Xplane11Training_A2C_1"
     wandb.init(entity=user, project=project, name=display_name)
